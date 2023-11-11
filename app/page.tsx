@@ -1,5 +1,7 @@
+import Link from "next/link";
 
 export default function Home() {
+  
   return (
     <main>
       <section className="overflow-hidden bg-[url(https://res.cloudinary.com/dvvqbwhcc/image/upload/v1699665145/nextjs-project/iil6jrovuqwl0vs6syvs.webp)] bg-cover bg-top bg-no-repeat">
@@ -10,32 +12,16 @@ export default function Home() {
             </h2>
 
             <div className="mt-4 sm:mt-8">
-              <a
-                href="#"
-                className="inline-block rounded-full bg-amber-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-amber-600 focus:outline-none"
+              <Link 
+                 className="inline-block rounded-full bg-amber-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-amber-600 focus:outline-none"
+                href={"/products/all"}
               >
                 Ordena aqui
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </section>
-
-        <a href="#" className="block">
-        {/* <img
-          alt="Signage"
-          src="https://images.unsplash.com/photo-1588515724527-074a7a56616c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
-          className="h-56 w-full rounded-bl-3xl rounded-tr-3xl object-cover sm:h-64 lg:h-72"
-        /> */}
-
-        <div className="mt-4 sm:flex sm:items-center sm:justify-center sm:gap-4">
-          <strong className="font-medium">Company Name</strong>
-
-          <span className="hidden sm:block sm:h-px sm:w-8 sm:bg-yellow-500"></span>
-
-          <p className="mt-0.5 opacity-50 sm:mt-0">Branding / Signage</p>
-        </div>
-      </a>
       <section>
         <div className="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

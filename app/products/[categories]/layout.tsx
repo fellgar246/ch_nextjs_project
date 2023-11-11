@@ -6,12 +6,13 @@ interface CategoriesLayoutProps {
 }
 
 const CategoriesLayout: React.FC<CategoriesLayoutProps> = ({ children }) => {
+
   return (
     <nav>
-      <div>
+     
 
         <div className="hidden sm:block">
-          <nav className="flex gap-6" aria-label="Tabs">
+          <nav className="flex gap-6 ml-7 mt-5" aria-label="Tabs">
             <Link 
                 href={"/products/all"}
                 className="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700"
@@ -45,7 +46,7 @@ const CategoriesLayout: React.FC<CategoriesLayoutProps> = ({ children }) => {
             </Link>
           </nav>
         </div>
-      </div>
+    
       {children}
     </nav>
   );

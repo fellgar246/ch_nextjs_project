@@ -1,6 +1,13 @@
+'use client'
 import React from 'react'
 
 export default function Register() {
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(e);
+  }
+
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
   <div className="mx-auto max-w-lg">
@@ -9,6 +16,7 @@ export default function Register() {
     </h1>
 
     <form
+      onChange={onSubmit}
       action=""
       className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
     >

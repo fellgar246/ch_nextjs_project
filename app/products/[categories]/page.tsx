@@ -22,7 +22,6 @@ const ProductsCategories = ({ params }: ParamsProps) => {
       : mockData.filter((product) => product.type === categories);
 
   if (items.length === 0) return <h1>Not found</h1>;
-  //router.replace('/')
 
   let title = categories.charAt(0).toUpperCase() + categories.slice(1);
   if (title === "All") title = "Todos los postres";

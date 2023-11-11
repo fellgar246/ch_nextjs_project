@@ -1,5 +1,12 @@
 import React from 'react'
 
+export const generateMetadata = async () => {
+  return {
+    title: "Borcelle - Nosotros",
+  };
+};
+
+
 export default function About() {
   return (
     <div className='flex justify-center items-center'>

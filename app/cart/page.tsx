@@ -1,6 +1,13 @@
+'use client'
 import { mockData, ProductDataType } from "@/data/products";
 
 export default function Cart() {
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(e);
+  }
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -30,7 +37,7 @@ export default function Cart() {
 
                 <div className="flex flex-1 items-center justify-end gap-2">
                   <h3 className="text-sm text-gray-900">${product.price}</h3>
-                  <form>
+                  <form  onChange={onSubmit}>
                     <label htmlFor="Line1Qty" className="sr-only">
                       {" "}
                       Quantity{" "}
@@ -40,6 +47,7 @@ export default function Cart() {
                       type="number"
                       min="1"
                       value="1"
+                      readOnly
                       id="Line1Qty"
                       className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                     />
