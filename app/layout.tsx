@@ -3,6 +3,7 @@ import './globals.css'
 import { roboto } from './fonts'
 
 import Header from '@/components/ui/Header'
+import { Footer } from '@/components/ui/Footer'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className={`${roboto.className} antiliased`}>
         <Header title={metadata.title} />
         {children}
+        <Footer />
       </body>
   
     </html>
