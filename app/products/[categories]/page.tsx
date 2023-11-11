@@ -9,7 +9,7 @@ interface ParamsProps {
 
 export const generateMetadata = async ({ params }: ParamsProps) => {
   return {
-    title: "Products -" + params.categories,
+    title: "Products - " + params.categories,
   };
 };
 
@@ -24,6 +24,9 @@ const ProductsCategories = ({ params }: ParamsProps) => {
   if (items.length === 0) return <h1>Not found</h1>;
   //router.replace('/')
 
+  let title = categories.charAt(0).toUpperCase() + categories.slice(1);
+  if (title === "All") title = "Todos los postres";
+
   return (
     <div>
 
@@ -31,8 +34,7 @@ const ProductsCategories = ({ params }: ParamsProps) => {
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <header>
             <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
-              {/* Nuestra Colección */}
-              {categories}
+              {title}
             </h2>
 
             <p className="mt-4 max-w-md text-gray-500">
@@ -44,7 +46,7 @@ const ProductsCategories = ({ params }: ParamsProps) => {
 
           <div className="mt-8">
             <p className="text-sm text-gray-500">
-              Showing <span> 4 </span> of 40
+              Mostrando <span> 12 </span> of 30
             </p>
           </div>
 

@@ -6,8 +6,6 @@ interface ProductCardProps {
     item: ProductDataType;
   }
 
-
-//! TODO: Agrergar imagen
 const ProductCard: React.FC<ProductCardProps>  = ( { item }) => {
 
     return (

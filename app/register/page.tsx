@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function Login() {
+export default function Register() {
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
   <div className="mx-auto max-w-lg">
     <h1 className="text-center text-2xl font-bold text-amber-500 sm:text-3xl">
-      Inicia Sesión
+      Crea una cuenta
     </h1>
 
     <form
@@ -13,7 +13,7 @@ export default function Login() {
       className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
     >
       <p className="text-center text-lg font-medium">
-        Inicia sesión con tu cuenta
+        Registrate aquí
       </p>
 
       <div>
@@ -84,11 +84,11 @@ export default function Login() {
         type="submit"
         className="block w-full rounded-lg bg-amber-500 px-5 py-3 text-sm font-medium text-white"
       >
-        Ingresar
+        Registrarse
       </button>
 
       <p className="text-center text-sm text-gray-500">
-        Aún no tienes una cuenta?{" "}
+        Ya tienes una cuenta?{" "}
         <a className="underline" href="">Registrate</a>
       </p>
     </form>

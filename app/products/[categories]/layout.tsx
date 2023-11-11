@@ -9,19 +9,6 @@ const CategoriesLayout: React.FC<CategoriesLayoutProps> = ({ children }) => {
   return (
     <nav>
       <div>
-        <div className="sm:hidden">
-          <label htmlFor="Tab" className="sr-only">
-            Tab
-          </label>
-
-          <select id="Tab" className="w-full rounded-md border-gray-200">
-            <option>Todos</option>
-            <option>Pasteles</option>
-            <option>Galletas</option>
-            <option>Pays</option>
-            <option selected>Muffins</option>
-          </select>
-        </div>
 
         <div className="hidden sm:block">
           <nav className="flex gap-6" aria-label="Tabs">

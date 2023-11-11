@@ -29,7 +29,7 @@ export const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-amber-700 transition hover:text-amber-700/75"
+                  className="text-amber-500 transition hover:text-amber-500/75"
                 >
                   <span className="sr-only">Facebook</span>
                   <svg
@@ -52,7 +52,7 @@ export const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-amber-700 transition hover:text-amber-700/75"
+                  className="text-amber-500 transition hover:text-amber-500/75"
                 >
                   <span className="sr-only">Instagram</span>
                   <svg
@@ -75,7 +75,7 @@ export const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-amber-700 transition hover:text-amber-700/75"
+                  className="text-amber-500 transition hover:text-amber-500/75"
                 >
                   <span className="sr-only">Twitter</span>
                   <svg
@@ -94,7 +94,7 @@ export const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-amber-700 transition hover:text-amber-700/75"
+                  className="text-amber-500 transition hover:text-amber-500/75"
                 >
                   <span className="sr-only">GitHub</span>
                   <svg
@@ -117,7 +117,7 @@ export const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-amber-700 transition hover:text-amber-700/75"
+                  className="text-amber-500 transition hover:text-amber-500/75"
                 >
                   <span className="sr-only">Dribbble</span>
                   <svg
@@ -159,15 +159,7 @@ export const Footer = () => {
                     Conoce al aquipo
                   </a>
                 </li>
-
-                <li>
-                  <a
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    href="/"
-                  >
-                    Careers
-                  </a>
-                </li>
+                
               </ul>
             </div>
 

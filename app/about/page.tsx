@@ -2,6 +2,11 @@ import React from 'react'
 
 export default function About() {
   return (
-    <div>About</div>
+    <div className='flex justify-center items-center'>
+       <h1 className="text-xl font-bold text-gray-900 sm:text-3xl">
+              En construcción
+        </h1>
+    </div>
+    
   )
 }

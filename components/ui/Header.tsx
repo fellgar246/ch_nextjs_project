@@ -98,7 +98,7 @@ const Header: React.FC= () => {
 
               <div className="hidden sm:flex">
                 <Link
-                  href={"/login"}
+                  href={"/register"}
                   className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-amber-500"
                 >
                   Registrarse
