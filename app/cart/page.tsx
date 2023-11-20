@@ -1,7 +1,17 @@
 'use client'
 import { mockData, ProductDataType } from "@/data/products";
+import { useCartContext } from "@/components/context/cartContext";
 
 export default function Cart() {
+
+  const context = useCartContext()
+
+  if (!context) {
+    throw new Error('useCartContext must be used within a cart');
+}
+
+  const { cart } = context;
+
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
+import { Suspense } from "react";
 
 interface CategoriesLayoutProps {
   children: ReactNode;
@@ -9,8 +10,6 @@ const CategoriesLayout: React.FC<CategoriesLayoutProps> = ({ children }) => {
 
   return (
     <nav>
-     
-
         <div className="hidden sm:block">
           <nav className="flex gap-6 ml-7 mt-5" aria-label="Tabs">
             <Link 
@@ -46,8 +45,9 @@ const CategoriesLayout: React.FC<CategoriesLayoutProps> = ({ children }) => {
             </Link>
           </nav>
         </div>
-    
+      <Suspense fallback={<div>Cargando...</div>}>
       {children}
+      </Suspense>
     </nav>
   );
 };

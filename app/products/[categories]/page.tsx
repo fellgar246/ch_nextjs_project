@@ -13,6 +13,18 @@ export const generateMetadata = async ({ params }: ParamsProps) => {
   };
 };
 
+export const generateStaticParams = async () => {
+  return [
+    {category:  "all"},
+    {category:  "pasteles"},
+    {category:  "galletas"},
+    {category:  "pays"},
+    {category:  "muffins"},
+  ]
+}
+
+export const revalidate = 3600;
+
 const ProductsCategories = ({ params }: ParamsProps) => {
   const { categories } = params;
 

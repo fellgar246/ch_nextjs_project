@@ -4,6 +4,7 @@ import { roboto } from './fonts'
 
 import Header from '@/components/ui/Header'
 import { Footer } from '@/components/ui/Footer'
+import { CartProvider } from '@/components/context/cartContext'
 
 export const metadata: Metadata = {
   title: 'Borcelle',
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.className} antiliased`}>
-        <Header />
-        {children}
-        <Footer />
+        <CartProvider>
+          <Header />
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
   
     </html>
