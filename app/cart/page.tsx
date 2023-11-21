@@ -1,6 +1,6 @@
 'use client'
 import { mockData, ProductDataType } from "@/data/products";
-import { useCartContext } from "@/components/context/cartContext";
+import { useCartContext } from "@/components/context/CartContext";
 
 export default function Cart() {
 

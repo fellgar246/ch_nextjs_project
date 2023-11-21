@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { useCartContext } from "../context/cartContext"
+import { useCartContext } from "../context/CartContext"
 import { ProductDataType } from "@/data/products";
 
 

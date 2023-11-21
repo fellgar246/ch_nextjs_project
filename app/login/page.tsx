@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import LoginForm from '@/components/auth/LoginForm';
 
 export default function Login() {
   const onSubmit = (e: React.FormEvent) => {
@@ -9,7 +10,8 @@ export default function Login() {
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-  <div className="mx-auto max-w-lg">
+      <LoginForm />
+  {/* <div className="mx-auto max-w-lg">
     <h1 className="text-center text-2xl font-bold text-amber-500 sm:text-3xl">
       Inicia Sesión
     </h1>
@@ -99,7 +101,7 @@ export default function Login() {
         <a className="underline" href="">Registrate</a>
       </p>
     </form>
-  </div>
+  </div> */}
 </div>
   )
 }
