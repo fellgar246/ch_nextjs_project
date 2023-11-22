@@ -6,7 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db, storage } from "@/firebase/config"
 import { ProductDataType } from "@/data/products";
 
-
+//TODO: Resetear formulario al enviar
 export type CreateProductDataType = {
     id: number;
     title: string;
