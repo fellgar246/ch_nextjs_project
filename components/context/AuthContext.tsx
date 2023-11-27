@@ -1,12 +1,22 @@
 'use client'
-import { auth } from "@/firebase/config";
-import { createContext, useContext, useState, ReactNode } from "react"
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, provider } from "@/firebase/config";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react"
+import { 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  onAuthStateChanged, 
+  signOut,
+  signInWithPopup
+} from "firebase/auth";
 
 //TODO: Separar user en otro type
 export type AuthContextType = {
-  user: UserAuthContextType,
-  registerUser: (values: LoginFormType) => Promise<void>;
+  user: UserAuthContextType
+  registerUser: (values: LoginFormType) => Promise<void>
+  loginUser: (values: LoginFormType) => Promise<void>
+  logoutUser: () => Promise<void>
+  loginGoogle: () => Promise<void>
+
 }
 
 export type UserAuthContextType = {
@@ -28,7 +38,7 @@ export const useAuthContext = () => {
   if (!context) {
     throw new Error('useAuthContext must be used within a AuthProvider');
   }
-  return context.user.logged;
+  return context;
 }
 
 
@@ -42,21 +52,41 @@ export const AuthProvider = ({ children }: {
     })
 
     const registerUser = async (values : LoginFormType ) => {
-      const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
-      console.log(userCredential);
-      
-      const user = userCredential.user
-    
-      setUser({
-        logged: true,
-        email: user.email,
-        uid: user.uid,
-      })
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
     }
     
+    const loginUser = async (values : LoginFormType ) => {
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+    }
+
+    const logoutUser = async () => {
+      await signOut(auth)
+    }
+
+    const loginGoogle = async () => {
+      await signInWithPopup(auth, provider) 
+    }
+
+    useEffect(() => {
+      onAuthStateChanged(auth, (user) => {      
+        if (user) {
+          setUser({
+            logged: true,
+            email: user.email,
+            uid: user.uid,
+          })
+        } else {
+          setUser({
+            logged: false,
+            email: null,
+            uid: null,
+          })
+        } 
+      });
+    })
 
   return (
-    <AuthContext.Provider value={{user, registerUser}}>
+    <AuthContext.Provider value={{user, registerUser, loginUser, logoutUser, loginGoogle}}>
       {children}
     </AuthContext.Provider>
   )

@@ -13,7 +13,7 @@ const AdminLayout = ({children, login}: {
   return (
     <>
         {
-            logged
+            logged.user.logged
             ? children
             : login
         }

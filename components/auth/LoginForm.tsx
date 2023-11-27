@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useAuthContext } from "../context/AuthContext"
 
 type LoginFormType = {
     email: string;
@@ -6,6 +7,7 @@ type LoginFormType = {
 }
 
 const LoginForm = () => {
+    const { registerUser, loginUser, loginGoogle }  = useAuthContext()
 
     const [values, setValues] = useState<LoginFormType>({
         email: '',
@@ -51,7 +53,9 @@ const LoginForm = () => {
                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                 />
             </div>
-            <button type="submit">Iniciar Sesión</button>
+            <button onClick={() => loginUser(values) } type="submit">Iniciar Sesión</button>
+            <button onClick={() => registerUser(values)}>Registrarse</button>
+            <button onClick={loginGoogle}>Google</button>
         </form>
     </div>
   )

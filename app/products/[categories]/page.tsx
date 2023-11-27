@@ -25,13 +25,17 @@ export const generateStaticParams = async () => {
 
 export const revalidate = 3600;
 
-const ProductsCategories = ({ params }: ParamsProps) => {
+const ProductsCategories = async ({ params }: ParamsProps) => {
   const { categories } = params;
 
-  const items =
-    categories === "all"
-      ? mockData
-      : mockData.filter((product) => product.type === categories);
+  const items = await fetch(`http://localhost:3000/api/products/${categories}`, {cache: "no-store"})
+  .then(res => {
+      if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+  })
+  .catch(e => console.log('There was a problem with your fetch operation: ' + e.message));
 
   if (items.length === 0) return <h1>Not found</h1>;
 
