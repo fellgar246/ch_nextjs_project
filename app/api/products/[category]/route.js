@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { collection, getDocs, query } from "firebase/firestore"
+import { collection, getDocs, query, where } from "firebase/firestore"
 import { db } from "@/firebase/config"
 
 const sleep = async (timer) => new Promise((resolve) => setTimeout(resolve, timer))
@@ -9,11 +9,11 @@ export const GET = async (_, { params }) => {
     
     const productsRef = collection(db, 'products')
 
-    const q = category === 'all'
+    const queryCategory = category === 'all'
         ? productsRef
         : query(productsRef, where('type', '==', category))
 
-    const querySnapshot = await getDocs(q)
+    const querySnapshot = await getDocs(queryCategory)
 
     const docs = querySnapshot.docs.map(doc => doc.data())
 

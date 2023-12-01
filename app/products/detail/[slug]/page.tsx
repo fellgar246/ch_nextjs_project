@@ -1,16 +1,34 @@
-import { mockData, ProductDataType } from "@/data/products";
 import Image from "next/image";
+import QtySelector from "@/components/products/QtySelector";
+
 interface ParamsProps {
   params: {
-    id: string;
+    slug: string;
   };
 }
 
-const DetailPage = ({ params }: ParamsProps) => {
-  const { id } = params;
-  if (id.length === 0) return <h1>Not found</h1>;
+const DetailPage = async({ params }: ParamsProps) => {
+  const { slug } = params;
+  if (slug.length === 0) return <h1>Not found</h1>;
 
-  const product = mockData.find((product) => product.slug === id);
+  console.log(slug);
+  const product = await fetch(
+    `http://localhost:3000/api/product/${slug}`, {
+      cache: 'no-store',
+      next: {
+        revalidate: 0
+      }
+    },
+  )
+  .then(res => {
+      if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+  })
+  .catch(e => console.log('There was a problem with your fetch operation: ' + e.message));
+
+  // const product = mockData.find((product) => product.slug === id);
   if (!product) return <h1>Not found</h1>;
 
   const categorie= product.type.charAt(0).toUpperCase() + product.type.slice(1);
@@ -89,9 +107,7 @@ const DetailPage = ({ params }: ParamsProps) => {
                   </div>
                 </div>
                 <div className="w-1/2 px-2">
-                  <button className="w-full bg-amber-500 text-white py-2 px-4 rounded-full font-bold hover:bg-amber-600 ">
-                    Añadir al carrito
-                  </button>
+                  <QtySelector item={product} />
                 </div>
               </div>
             </div>

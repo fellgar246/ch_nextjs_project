@@ -26,7 +26,12 @@ const QtySelector = ({item}: {item: ProductDataType} ) => {
 
   return (
     <div>
-        <button onClick={handleQtyAdd}>Agregar al carrito</button>
+        <button 
+            onClick={handleQtyAdd}
+            className="w-full bg-amber-500 text-white py-2 px-4 rounded-full font-bold hover:bg-amber-600 "
+        >
+            Añadir al carrito
+        </button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { mockData, ProductDataType } from "@/data/products";
+import { ProductDataType } from "@/data/products";
 import ProductCard from "@/components/products/ProductCard";
 
 interface ParamsProps {
@@ -37,7 +37,7 @@ const ProductsCategories = async ({ params }: ParamsProps) => {
   })
   .catch(e => console.log('There was a problem with your fetch operation: ' + e.message));
 
-  if (items.length === 0) return <h1>Not found</h1>;
+  if (items?.length === 0) return <h1>Not found</h1>;
 
   let title = categories.charAt(0).toUpperCase() + categories.slice(1);
   if (title === "All") title = "Todos los postres";
