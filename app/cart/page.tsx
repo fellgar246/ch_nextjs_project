@@ -1,29 +1,23 @@
 'use client'
 import { mockData, ProductDataType } from "@/data/products";
 import { useCartContext } from "@/components/context/CartContext";
+import { CartType, CartItem } from "@/components/context/CartContext";
 
 
 export default function Cart() {
-
-  //TODO: Agregar botón para borrar todo el carrito
 
   const context = useCartContext()
   if (!context) {
     throw new Error('useCartContext must be used within a cart');
   }
 
-  const { cart, deleteFromCart, totalPrice } = context;
-
-  console.log("cart",cart);
+  const { cart, deleteFromCart, totalPrice, emptyCart } = context;
 
   const totalCartPrice = totalPrice();
   
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(e);
   }
-
-
 
   return (
     <section>
@@ -34,24 +28,31 @@ export default function Cart() {
               Carrito de compra
             </h1>
           </header>
-
           <div className="mt-8">
+            {cart.items.length ?
+            <>
+                  <button 
+               onClick={emptyCart} 
+               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-3"
+             >
+              Limpiar Carrito
+             </button> 
             <ul className="space-y-4">
-              {/* {mockData.slice(0, 3).map((product: ProductDataType) => ( */}
-              { cart.length ?  cart.map((product: ProductDataType) => (           
-                <li key={product.id} className="flex items-center gap-4">
+               {cart.items.map((item: CartItem) => (           
+                <li key={item.product.id} className="flex items-center gap-4">
                   <div>
-                    <h3 className="text-sm text-gray-900">{product.title}</h3>
+                    <h3 className="text-sm text-gray-900">{item.product.title}</h3>
                     <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
                       <div>
                         <dt className="inline">Tamaño:</dt>
-                        <dd className="inline">{product.size ? product.size : "N/A"}</dd>
+                        <dd className="inline">{item.product.size ? item.product.size : "N/A"}</dd>
                       </div>
                     </dl>
                   </div>
 
                   <div className="flex flex-1 items-center justify-end gap-2">
-                    <h3 className="text-sm text-gray-900">${product.price}</h3>
+                    <h3 className="text-sm text-gray-900">${item.product.price}</h3>
+                    <p className="text-sm text-gray-900"> x </p>
                     <form  onChange={onSubmit}>
                       <label htmlFor="Line1Qty" className="sr-only">
                         {" "}
@@ -61,14 +62,14 @@ export default function Cart() {
                       <input
                         type="number"
                         min="1"
-                        value="1"
+                        value={item.quantity}
                         readOnly
                         id="Line1Qty"
                         className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                       />
                     </form>
 
-                    <button onClick={()=> deleteFromCart(product.slug)}  className="text-gray-600 transition hover:text-red-600">
+                    <button onClick={()=> deleteFromCart(item.product.slug)}  className="text-gray-600 transition hover:text-red-600">
                       <span className="sr-only">Remove item</span>
 
                       <svg
@@ -88,8 +89,7 @@ export default function Cart() {
                     </button>
                   </div>
                 </li>
-            
-              )): <p>No hay productos en el carrito</p>}
+            ))}
            
             </ul>
 
@@ -127,6 +127,8 @@ export default function Cart() {
                 </div>
               </div>
             </div>
+            </>
+             : <p>No hay productos en el carrito</p> }
           </div>
         </div>
       </div>

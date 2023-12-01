@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
+import Link from "next/link";
 
 type LoginFormType = {
   email: string;
@@ -23,38 +24,10 @@ const LoginForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(values);
   };
 
   return (
     <>
-      {/* <form onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <div>
-                <label htmlFor="email">Email</label>
-                <input 
-                    type="email"
-                    name="email"
-                    onChange={handleChange}
-                    value={values.email}
-                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input  
-                    type="password"
-                    name="password"
-                    onChange={handleChange}
-                    value={values.password}
-                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                />
-            </div>
-            <button onClick={() => loginUser(values) } type="submit">Iniciar Sesión</button>
-            <button onClick={() => registerUser(values)}>Registrarse</button>
-            <button onClick={loginGoogle}>Google</button>
-        </form> */}
-
       <div className="mx-auto max-w-lg">
         <h1 className="text-center text-2xl font-bold text-amber-500 sm:text-3xl">
           Inicia Sesión
@@ -152,9 +125,9 @@ const LoginForm = () => {
 
           <p className="text-center text-sm text-gray-500">
             Aún no tienes una cuenta?{" "}
-            <a className="underline" href="">
-              Registrate
-            </a>
+            <Link href={"/register"} className="underline">
+              Registrate 
+            </Link>
           </p>
         </form>
       </div>

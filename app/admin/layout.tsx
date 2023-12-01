@@ -15,7 +15,10 @@ const AdminLayout = ({children, login}: {
         {
             logged.user.logged
             ? children
-            : login
+            : <>
+             <p>Para acceder a la vista de administrador</p>
+              <p>Es necesario te registres o inicies sesión</p>
+            </>
         }
     </>
   )

@@ -5,63 +5,70 @@ import { doc, setDoc } from "firebase/firestore";
 import { db, storage } from "@/firebase/config"
 
 
-interface CartItem {
-    productId: string;
+export type CartItem = {
+    product:  ProductDataType;
     quantity: number;
   }
   
-  interface Cart {
+export type CartType = {
     userId: string;
     items: CartItem[];
   }
 
-type CartContextType = {
-    cart: ProductDataType[];
-    addToCart: (item: ProductDataType) => void;
+export type CartContextType = {
+    cart: CartType;
+    addToCart: (item: ProductDataType,quantity: number ) => void;
     isInCart: (slug: string) => boolean;
     emptyCart: () => void;
     totalPrice: () => number;
     deleteFromCart: (slug: string) => void;
   };
 
-//TODO: completar createCart
-// const createCart = async (values: Cart) => {
-
-//     const docRef = doc(db, "products", values.userId);
-
-//     return await setDoc(docRef, {
-//         ...values
-//     })
-// }
-
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export const useCartContext = () => useContext(CartContext)
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [cart, setCart] = useState<ProductDataType[]>([])
-    console.log(cart);
-
-    
-    const addToCart = (item: ProductDataType) => {
-        setCart([...cart, item])
-    }
+    const [cart, setCart] = useState<CartType>({
+        userId: "",
+        items: []
+    })
 
     const isInCart = (slug: string) => {
-        return cart.some(item => item.slug === slug)
+        return cart.items.some(item => item.product.slug === slug);
 
+    }
+    
+    const addToCart = (item: ProductDataType, quantity: number) => {
+
+        setCart(prevCart => {
+            const itemIndex = prevCart.items.findIndex(cartItem => cartItem.product.slug === item.slug);
+            if (itemIndex !== -1) {
+                const newItems = [...prevCart.items];
+                newItems[itemIndex] = { ...newItems[itemIndex], quantity: newItems[itemIndex].quantity + quantity };
+                return { ...prevCart, items: newItems };
+            } else {
+                return { ...prevCart, items: [...prevCart.items, { product: item, quantity }] };
+            }
+        });
+
+       
     }
 
     const totalPrice = () => {
-        return cart.reduce((acc, item) => acc + Number(item.price), 0)
+        // return cart.reduce((acc, item) => acc + Number(item.price), 0)
+        return cart.items.reduce((acc, item) => acc + Number(item.product.price) * item.quantity, 0);
     }
 
     const deleteFromCart = (slug: string) => {
-        setCart(cart.filter(item => item.slug !== slug));
+        setCart(prevCart => ({
+            ...prevCart,
+            items: prevCart.items.filter(item => item.product.slug !== slug)
+        }));
     }
 
     const emptyCart = () => {
-        setCart([])
+        setCart({items: [], userId: ""})
     }
 
     return (

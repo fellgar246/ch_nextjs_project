@@ -9,7 +9,6 @@ import {
   signInWithPopup
 } from "firebase/auth";
 
-//TODO: Separar user en otro type
 export type AuthContextType = {
   user: UserAuthContextType
   registerUser: (values: LoginFormType) => Promise<void>
@@ -25,7 +24,6 @@ export type UserAuthContextType = {
   uid: string | null;
 }
 
-//TODO: Unificar tipos de datos con login form
 type LoginFormType = {
   email: string;
   password: string;

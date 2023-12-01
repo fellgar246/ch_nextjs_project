@@ -4,7 +4,7 @@ import { useCartContext } from "../context/CartContext"
 import { ProductDataType } from "@/data/products";
 
 
-const QtySelector = ({item}: {item: ProductDataType} ) => {
+const QtySelector = ({item, quantity}: {item: ProductDataType, quantity: number} ) => {
 
     const context = useCartContext()
 
@@ -14,13 +14,10 @@ const QtySelector = ({item}: {item: ProductDataType} ) => {
 
     const {addToCart} = context
 
-    const [quantity, setQuantity] = useState(1)
-
-    const handleQtyAdd= () => {
-    //TODO: Habilitar agregar al carrito    
+    const handleQtyAdd= () => {    
         addToCart({
             ...item,
-        })
+        }, quantity)
     }
 
 

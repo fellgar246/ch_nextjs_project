@@ -1,5 +1,3 @@
-//TODO: Agregar ruta para todas las funciones de cart
-//TODO: Crear modelo del carrito
 
 export const GET = async (_, { params }) => {
     const { id } = params

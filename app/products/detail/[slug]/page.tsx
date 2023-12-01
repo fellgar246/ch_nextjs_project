@@ -1,5 +1,8 @@
+'use client'
 import Image from "next/image";
 import QtySelector from "@/components/products/QtySelector";
+import { useEffect, useState } from "react";
+import { ProductDataType } from "@/data/products";
 
 interface ParamsProps {
   params: {
@@ -7,31 +10,42 @@ interface ParamsProps {
   };
 }
 
-const DetailPage = async({ params }: ParamsProps) => {
+const DetailPage = ({ params }: ParamsProps) => {
+  const [quantity, setQuantity] = useState(1)
+  const [product, setProduct] = useState<ProductDataType>();
   const { slug } = params;
-  if (slug.length === 0) return <h1>Not found</h1>;
+  // if (slug.length === 0) return <h1>Not found</h1>;
 
-  console.log(slug);
-  const product = await fetch(
-    `http://localhost:3000/api/product/${slug}`, {
-      cache: 'no-store',
-      next: {
-        revalidate: 0
-      }
-    },
-  )
-  .then(res => {
-      if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      return res.json();
-  })
-  .catch(e => console.log('There was a problem with your fetch operation: ' + e.message));
+  useEffect(() => {
+    if (slug.length === 0) return;
 
-  // const product = mockData.find((product) => product.slug === id);
+    const fetchProduct = async () => {
+      const response = await fetch(`http://localhost:3000/api/product/${slug}`, {
+        cache: 'no-store'
+      });
+
+      if (response.ok) {
+        const productData = await response.json();
+        setProduct(productData);
+      } else {
+        console.log(`HTTP error! status: ${response.status}`);
+      }
+    };
+
+    fetchProduct().catch(e => console.log('There was a problem with your fetch operation: ' + e.message));
+  }, [slug]);
+
   if (!product) return <h1>Not found</h1>;
 
   const categorie= product.type.charAt(0).toUpperCase() + product.type.slice(1);
+
+  const increaseQuantity = () => {
+    setQuantity(prevQuantity => prevQuantity < 10 ? prevQuantity + 1 : prevQuantity);
+}
+
+const decreaseQuantity = () => {
+    setQuantity(prevQuantity => prevQuantity > 1 ? prevQuantity - 1 : prevQuantity);
+}
 
   return (
     <div className="flex items-center justify-center">
@@ -86,6 +100,7 @@ const DetailPage = async({ params }: ParamsProps) => {
                     <button
                       type="button"
                       className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                      onClick={decreaseQuantity}
                     >
                       &minus;
                     </button>
@@ -93,7 +108,7 @@ const DetailPage = async({ params }: ParamsProps) => {
                     <input
                       type="number"
                       id="Quantity"
-                      value="1"
+                      value={quantity}
                       readOnly
                       className="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                     />
@@ -101,13 +116,14 @@ const DetailPage = async({ params }: ParamsProps) => {
                     <button
                       type="button"
                       className="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                      onClick={increaseQuantity}
                     >
                       +
                     </button>
                   </div>
                 </div>
                 <div className="w-1/2 px-2">
-                  <QtySelector item={product} />
+                  <QtySelector item={product} quantity={quantity} />
                 </div>
               </div>
             </div>

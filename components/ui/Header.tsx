@@ -13,7 +13,7 @@ const Header: React.FC= () => {
   
   const { cart } = context;
 
-  const cartItems = cart.length;
+  const cartItems = cart.items.length;
 
   return (
     <header className="bg-white">
