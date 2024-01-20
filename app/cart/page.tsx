@@ -1,10 +1,30 @@
 'use client'
-import { mockData, ProductDataType } from "@/data/products";
 import { useCartContext } from "@/components/context/CartContext";
-import { CartType, CartItem } from "@/components/context/CartContext";
+import { CartItem, CartType } from "@/types/ICart";
+import { useEffect, useState } from "react";
 
 
 export default function Cart() {
+
+  const [userCart, setUserCart] = useState<CartType>()
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const response = await fetch(`http://localhost:3000/api/cart/`);
+
+      if (response.ok) {
+        const cart = await response.json();
+        setUserCart(cart);
+      } else {
+        console.log(`HTTP error! status: ${response.status}`);
+      }
+    };
+
+    fetchProduct().catch(e => console.log('There was a problem with your fetch operation: ' + e.message));
+  }, []);
+
+  console.log("useCart",userCart);
+  
 
   const context = useCartContext()
   if (!context) {

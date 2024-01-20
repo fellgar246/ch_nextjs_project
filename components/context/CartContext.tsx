@@ -1,19 +1,12 @@
 'use client'
 import { createContext, useContext, ReactNode, useState } from "react"
-import { ProductDataType } from "@/data/products";
+import { ProductDataType } from "@/types/IProduct";
+import { CartType } from "@/types/ICart";
 import { doc, setDoc } from "firebase/firestore";
 import { db, storage } from "@/firebase/config"
 
 
-export type CartItem = {
-    product:  ProductDataType;
-    quantity: number;
-  }
-  
-export type CartType = {
-    userId: string;
-    items: CartItem[];
-  }
+
 
 export type CartContextType = {
     cart: CartType;

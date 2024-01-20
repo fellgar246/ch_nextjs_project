@@ -2,7 +2,7 @@
 import Image from "next/image";
 import QtySelector from "@/components/products/QtySelector";
 import { useEffect, useState } from "react";
-import { ProductDataType } from "@/data/products";
+import { ProductDataType } from "@/types/IProduct";
 
 interface ParamsProps {
   params: {
@@ -60,6 +60,8 @@ const decreaseQuantity = () => {
                   alt={product.slug}
                   height={460}
                   width={460}
+                  // blurDataURL="data:..."
+                  // placeholder="blur"
                 />
               </div>
             </div>

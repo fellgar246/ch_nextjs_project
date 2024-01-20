@@ -4,23 +4,11 @@ import { useState, useRef } from "react"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { db, storage } from "@/firebase/config"
-import { ProductDataType } from "@/data/products";
-
-export type CreateProductDataType = {
-    id: number;
-    title: string;
-    description: string;
-    inStock: number;
-    price: number;
-    slug: string;
-    image: Blob | Uint8Array | ArrayBuffer;
-    type: string;
-    size?: string;
-    };
-
+import { ProductDataType } from "@/types/IProduct";
     
 const createProduct = async (values: ProductDataType, file: Blob | Uint8Array | ArrayBuffer) => {
  
+    //TODO: Pasar lógica a un post
     const storageRef = ref(storage, values.slug);
     const fileSnapshot = await uploadBytes(storageRef, file);
 
@@ -31,12 +19,14 @@ const createProduct = async (values: ProductDataType, file: Blob | Uint8Array | 
 
     return await setDoc(docRef, {
         ...values,
+        price: Number(values.price),
+        inStock: Number(values.inStock),
         image: fileUrl
     })
 }
 
 
-const CreateFrom = () => {
+const CreateForm = () => {
     const formRef = useRef<HTMLFormElement>(null); 
     const initialValues: ProductDataType = {
         id: 0,
@@ -158,4 +148,4 @@ const CreateFrom = () => {
   )
 }
 
-export default CreateFrom
+export default CreateForm

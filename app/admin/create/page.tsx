@@ -1,9 +1,9 @@
-import CreateFrom from "@/components/admin/CreateFrom"
+import CreateForm from "@/components/admin/CreateForm"
 
 const CreatePage = () => {
   return (
     <div>
-        <CreateFrom />
+        <CreateForm />
     </div>
   )
 }

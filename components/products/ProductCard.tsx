@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ProductDataType } from "@/data/products";
+import { ProductDataType } from "@/types/IProduct";
 import Link from "next/link";
 
 interface ProductCardProps {
@@ -18,6 +18,7 @@ const ProductCard: React.FC<ProductCardProps>  = ( { item }) => {
              className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
              width={200}
              height={100}
+            //  placeholder="blur"
            />
 
            <div className="relative bg-white pt-3">

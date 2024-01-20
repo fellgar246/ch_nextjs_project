@@ -1,8 +1,7 @@
 "use client"
-import { useState } from "react"
 import { useCartContext } from "../context/CartContext"
-import { ProductDataType } from "@/data/products";
-
+import { ProductDataType } from "@/types/IProduct";
+//TODO: Verificar si vale la pena que sea use cliente
 
 const QtySelector = ({item, quantity}: {item: ProductDataType, quantity: number} ) => {
 

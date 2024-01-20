@@ -23,7 +23,7 @@ export type UserAuthContextType = {
   email: string | null;
   uid: string | null;
 }
-
+//TODO: Mover type
 type LoginFormType = {
   email: string;
   password: string;
@@ -48,13 +48,20 @@ export const AuthProvider = ({ children }: {
       email: null,
       uid: null,
     })
-
+    //TODO: Agregar alertas de confirmación o error
+    //TODO: Crear usuario al momento de registrarse
+    //TODO: Crear carrito al momento de registrarse
     const registerUser = async (values : LoginFormType ) => {
       await createUserWithEmailAndPassword(auth, values.email, values.password);
     }
     
     const loginUser = async (values : LoginFormType ) => {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
+      // await signInWithEmailAndPassword(auth, values.email, values.password);
+      try {
+       await signInWithEmailAndPassword(auth, values.email, values.password);
+      } catch (error) {
+        console.error("Error al iniciar sesión: ", error);
+      }
     }
 
     const logoutUser = async () => {
@@ -66,7 +73,7 @@ export const AuthProvider = ({ children }: {
     }
 
     useEffect(() => {
-      onAuthStateChanged(auth, (user) => {      
+      onAuthStateChanged(auth, (user) => {   
         if (user) {
           setUser({
             logged: true,

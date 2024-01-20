@@ -1,13 +1,13 @@
+import { NextResponse } from "next/server"
+import { collection, getDocs, query, where, getDoc } from "firebase/firestore"
+import { db } from "@/firebase/config"
 
-export const GET = async (_, { params }) => {
-    const { id } = params
+export const GET = async () => {
     
-    const userId = EtEmtxQrhnak2XAGuQH4CFcXjfI3
+    const productsRef = collection(db, 'cart');
+    const querySnapshot = await getDocs(productsRef);
+    const docs = querySnapshot.docs.map(doc => doc.data());
+    return NextResponse.json(docs)
 
-    const docRef = doc(db, 'cart', userId)
-
-    const  docSnapshot = await getDoc(docRef)
-
-    return NextResponse.json(docSnapshot.data())
 
 }

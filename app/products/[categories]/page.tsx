@@ -1,4 +1,4 @@
-import { ProductDataType } from "@/data/products";
+import { ProductDataType } from "@/types/IProduct";
 import ProductCard from "@/components/products/ProductCard";
 
 interface ParamsProps {
